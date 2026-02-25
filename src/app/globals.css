@@ -1,26 +1,104 @@
+/**
+ * globals.css
+ *
+ * Estilos globales de la landing page de Solger Software.
+ * Define la paleta de colores de marca, tipografía, modo oscuro/claro,
+ * estilos de scrollbar, efectos glow y transiciones suaves de tema.
+ */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ─── Variables de tema: colores de marca y sistema ─── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-red: #DC2626;
+  --color-brand-red-dark: #B91C1C;
+  --color-brand-red-light: #EF4444;
+  --color-brand-red-glow: rgba(220, 38, 38, 0.4);
+  --color-dark-base: #0F0F0F;
+  --color-dark-secondary: #1E1E1E;
+  --color-dark-tertiary: #2A2A2A;
+  --color-dark-card: #181818;
+  --color-gray-light: #F5F5F5;
+  --color-gray-100: #F0F0F0;
+  --color-gray-200: #E5E5E5;
+  --color-gray-300: #D4D4D4;
+  --color-gray-400: #A3A3A3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Transición suave entre temas claro/oscuro */
+html {
+  scroll-behavior: smooth;
 }
 
+html.transitioning * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Valores predeterminados del modo claro */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #171717;
+}
+
+/* Modo oscuro */
+.dark body {
+  background-color: var(--color-dark-base);
+  color: #ededed;
+}
+
+/* Estilos de la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Efecto glow rojo en foco de inputs */
+.focus-red-glow:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+  border-color: #DC2626;
+  outline: none;
+}
+
+/* Glow rojo sutil al pasar el mouse en tarjetas */
+.hover-red-glow:hover {
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.15);
+}
+
+.dark .hover-red-glow:hover {
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.25);
+}
+
+/* Color de selección de texto */
+::selection {
+  background-color: rgba(220, 38, 38, 0.2);
+  color: inherit;
 }
