@@ -2,15 +2,17 @@
  * layout.tsx
  *
  * Layout raíz de la aplicación Next.js.
- * Configura SEO (metadata, Open Graph, Twitter Cards),
- * fuente Inter de Google Fonts, idioma español,
- * y envuelve toda la aplicación en el ThemeProvider.
+ * Configura SEO, fuente Inter, idioma español y ThemeProvider.
+ * El Navbar y Footer se manejan condicionalmente:
+ * - /ingenieria/* usa su propio NavbarIngenieria (via layout.tsx de ingeniería)
+ * - El resto usa los componentes globales
  */
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import LayoutShell from "@/components/layout/LayoutShell";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,35 +21,37 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Solger Software | Sistemas de Gestión Empresarial Personalizados",
+  title: "Solger Ingeniería y Tecnología EIRL | Ingeniería y Software",
   description:
-    "Desarrollamos sistemas de gestión empresarial a medida. Automatiza procesos, reduce errores y escala tu negocio con tecnología moderna. Solger Ingeniería y Tecnología EIRL.",
+    "Soluciones de ingeniería, seguridad y software para empresas. Defensa civil, extintores, fumigación, sistemas contra incendios, desarrollo web y sistemas empresariales. Lima, Perú.",
   keywords: [
+    "ingeniería",
+    "seguridad",
+    "defensa civil",
+    "extintores",
+    "fumigación",
+    "pozo a tierra",
+    "sistemas contra incendios",
     "software empresarial",
-    "sistema de gestión",
-    "software personalizado",
-    "ERP",
-    "gestión comercial",
-    "gestión de inventarios",
-    "software clínicas",
-    "software veterinaria",
+    "desarrollo web",
+    "Lima",
     "Perú",
-    "Solger Software",
+    "Solger",
   ],
   authors: [{ name: "Solger Ingeniería y Tecnología EIRL" }],
   openGraph: {
-    title: "Solger Software | Sistemas de Gestión Empresarial Personalizados",
+    title: "Solger Ingeniería y Tecnología EIRL",
     description:
-      "Digitaliza tu empresa con sistemas de gestión a medida. Tecnología moderna, soporte continuo y resultados reales.",
+      "Ingeniería, seguridad y tecnología para empresas. Soluciones reales y confiables.",
     type: "website",
     locale: "es_PE",
-    siteName: "Solger Software",
+    siteName: "Solger",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solger Software | Sistemas de Gestión Empresarial",
+    title: "Solger Ingeniería y Tecnología EIRL",
     description:
-      "Digitaliza tu empresa con sistemas de gestión a medida. Tecnología moderna y resultados reales.",
+      "Ingeniería, seguridad y tecnología para empresas. Soluciones reales y confiables.",
   },
   robots: {
     index: true,
@@ -63,7 +67,9 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LayoutShell>{children}</LayoutShell>
+        </ThemeProvider>
       </body>
     </html>
   );
